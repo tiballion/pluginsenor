@@ -39,9 +39,11 @@ public class CommandSpawn implements CommandExecutor {
                 if(teleportingPlayers.containsKey(player)) {
                     player.sendMessage("You already have a teleportation pending.");
                 } else {
-                    BukkitTask task = new teleportTask(this.pluginsenor, location, player).runTaskLater(this.pluginsenor, 60);
+                    int teleportTimeout = (int) pluginsenor.getConfig().get("teleport_timeout");
+                    BukkitTask task = new teleportTask(this.pluginsenor, location, player)
+                            .runTaskLater(this.pluginsenor, (int) teleportTimeout*20);
                     teleportingPlayers.put(player, task.getTaskId());
-                    player.sendMessage("Teleporting you to spawn, please wait 3 seconds");
+                    player.sendMessage("Teleporting you to spawn, please wait " + teleportTimeout + " seconds.");
                 }
             }
         }
