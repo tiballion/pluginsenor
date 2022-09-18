@@ -17,6 +17,11 @@ public class CommandSetSpawn implements CommandExecutor {
         this.pluginsenor = pluginsenor;
     }
 
+    /**
+     * Sets the spawn of a given player to a given location
+     * @param location the location
+     * @param player the player
+     */
     private void setSpawn(Location location, Player player) {
         pluginsenor.getConfig().set("spawn", location);
         pluginsenor.saveConfig();
@@ -28,6 +33,9 @@ public class CommandSetSpawn implements CommandExecutor {
         if(sender instanceof Player) {
             Player player = (Player) sender;
             Location location = player.getLocation();
+            // if no arguments are passed the spawn is set to the player location
+            // if 3 arguments are passed the spawn is set to them
+            // else it sends the player an error
             if(args.length == 0) {
                 setSpawn(location, player);
             } else if(args.length == 3) {

@@ -20,6 +20,9 @@ public class teleportTask extends BukkitRunnable {
         this.player = player;
     }
 
+    /*
+    Teleports the player after waiting for the cooldown and removes the player from the teleporting players hashmap.
+     */
     @Override
     public void run() {
         player.teleport(location);

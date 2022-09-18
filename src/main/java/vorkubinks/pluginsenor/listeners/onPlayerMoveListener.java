@@ -21,6 +21,7 @@ public class onPlayerMoveListener implements Listener {
 
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
+        // if the player is in the teleporting player hashmap, the function remove him and cancels the teleport
         HashMap<Player, Integer> teleportingPlayers = CommandSpawn.getTeleportingPlayers();
         Player player = event.getPlayer();
         if(teleportingPlayers.containsKey(player)) {

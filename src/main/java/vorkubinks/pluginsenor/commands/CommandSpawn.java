@@ -34,11 +34,15 @@ public class CommandSpawn implements CommandExecutor {
             Location location = pluginsenor.getConfig().getLocation("spawn");
 
             if(location == null) {
+                // there is no location object in the config.yml
                 player.sendMessage("The spawn location hasn't been set on this server yet.");
             } else {
                 if(teleportingPlayers.containsKey(player)) {
+                    // the player is already in the teleportingPlayers hashmap
                     player.sendMessage("You already have a teleportation pending.");
                 } else {
+                    // creating a task that is executed after the teleport_timeout set by the admin
+                    // adds the player to the teleporting players hashmap
                     int teleportTimeout = (int) pluginsenor.getConfig().get("teleport_timeout");
                     BukkitTask task = new teleportTask(this.pluginsenor, location, player)
                             .runTaskLater(this.pluginsenor, (int) teleportTimeout*20);
