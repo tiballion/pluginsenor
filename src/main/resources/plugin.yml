@@ -1,0 +1,11 @@
+name: Pluginsenor
+version: '${version}'
+main: vorkubinks.pluginsenor.Pluginsenor
+api-version: 1.19
+commands:
+  spawn:
+    description: Command used to teleport back to spawn
+    permission: spawn.use
+  setspawn:
+    description: Command used to set the spawn of the server
+    permission: setspawn.use
