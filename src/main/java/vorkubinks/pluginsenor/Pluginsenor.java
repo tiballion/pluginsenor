@@ -12,8 +12,6 @@ public final class Pluginsenor extends JavaPlugin {
     @Override
     public void onEnable() {
         Config c = Config.initConfig(this);
-        //getConfig().options().copyDefaults();
-        //saveDefaultConfig();
         this.getCommand("spawn").setExecutor(new CommandSpawn(this, c));
         this.getCommand("setspawn").setExecutor(new CommandSetSpawn(this, c));
         this.getCommand("plugino.reload").setExecutor(new CommandReloadConfig(this, c));

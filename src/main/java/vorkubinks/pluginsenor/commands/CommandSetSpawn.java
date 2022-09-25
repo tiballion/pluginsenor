@@ -24,8 +24,6 @@ public class CommandSetSpawn implements CommandExecutor {
      */
     private void setSpawn(Location location, Player player) {
         config.setSpawnLocation(location);
-        //pluginsenor.getConfig().set("spawn", location);
-        //pluginsenor.saveConfig();
         player.sendMessage("Spawn location has been set.");
     }
 
