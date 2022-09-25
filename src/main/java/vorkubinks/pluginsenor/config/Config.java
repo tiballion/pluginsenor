@@ -2,9 +2,11 @@ package vorkubinks.pluginsenor.config;
 
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.plugin.Plugin;
-import org.checkerframework.checker.units.qual.C;
+import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 import vorkubinks.pluginsenor.Pluginsenor;
+
+import java.io.File;
 
 public class Config {
     private final Pluginsenor pluginsenor;
@@ -35,12 +37,11 @@ public class Config {
      * Reloads the config file
      * @param plugin the plugin
      */
-    public void reloadConfig(Pluginsenor plugin) {
-        plugin.getConfig().options().copyDefaults();
-        plugin.saveDefaultConfig();
-        FileConfiguration c = pluginsenor.getConfig();
-        this.spawnLocation = c.getLocation("spawn");
-        this.teleportTimeout = (int) c.get("teleport_timeout");
+    public void reloadConfig(Pluginsenor plugin, Player player) {
+        File file = new File(plugin.getDataFolder(), "/config.yml");
+        YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
+        this.teleportTimeout = (int) config.get("teleport_timeout");
+        this.spawnLocation = config.getLocation("spawn");
     }
 
     public int getTeleportTimeout() {

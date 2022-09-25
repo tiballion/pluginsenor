@@ -19,7 +19,7 @@ public class CommandReloadConfig implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(sender instanceof Player player) {
-            config.reloadConfig(pluginsenor);
+            config.reloadConfig(pluginsenor, player);
             player.sendMessage("Plugino has been successfully reloaded.");
         }
         return true;
