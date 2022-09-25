@@ -20,7 +20,7 @@ public class Config {
     }
 
     /**
-     * Init the config object
+     * Inits the config object
      * @param plugin the plugin
      * @return the config
      */
