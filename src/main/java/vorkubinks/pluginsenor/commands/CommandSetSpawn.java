@@ -1,20 +1,20 @@
 package vorkubinks.pluginsenor.commands;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import vorkubinks.pluginsenor.Pluginsenor;
+import vorkubinks.pluginsenor.config.Config;
 
 public class CommandSetSpawn implements CommandExecutor {
     private final Pluginsenor pluginsenor;
+    private Config config;
 
-    public CommandSetSpawn(Pluginsenor pluginsenor) {
+    public CommandSetSpawn(Pluginsenor pluginsenor, Config config) {
         this.pluginsenor = pluginsenor;
+        this.config = config;
     }
 
     /**
@@ -23,8 +23,9 @@ public class CommandSetSpawn implements CommandExecutor {
      * @param player the player
      */
     private void setSpawn(Location location, Player player) {
-        pluginsenor.getConfig().set("spawn", location);
-        pluginsenor.saveConfig();
+        config.setSpawnLocation(location);
+        //pluginsenor.getConfig().set("spawn", location);
+        //pluginsenor.saveConfig();
         player.sendMessage("Spawn location has been set.");
     }
 

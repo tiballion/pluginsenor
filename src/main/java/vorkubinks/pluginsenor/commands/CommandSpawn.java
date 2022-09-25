@@ -7,16 +7,19 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
 import vorkubinks.pluginsenor.Pluginsenor;
+import vorkubinks.pluginsenor.config.Config;
 import vorkubinks.pluginsenor.tasks.teleportTask;
 
 import java.util.HashMap;
 
 public class CommandSpawn implements CommandExecutor {
     private final Pluginsenor pluginsenor;
+    private Config config;
     private static HashMap<Player, Integer> teleportingPlayers = new HashMap<>();
 
-    public CommandSpawn(Pluginsenor pluginsenor) {
+    public CommandSpawn(Pluginsenor pluginsenor, Config config) {
         this.pluginsenor = pluginsenor;
+        this.config = config;
     }
 
     public static HashMap<Player, Integer> getTeleportingPlayers () {
@@ -31,7 +34,7 @@ public class CommandSpawn implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(sender instanceof Player player) {
 
-            Location location = pluginsenor.getConfig().getLocation("spawn");
+            Location location = config.getSpawnLocation();
 
             if(location == null) {
                 // there is no location object in the config.yml
@@ -43,7 +46,8 @@ public class CommandSpawn implements CommandExecutor {
                 } else {
                     // creating a task that is executed after the teleport_timeout set by the admin
                     // adds the player to the teleporting players hashmap
-                    int teleportTimeout = (int) pluginsenor.getConfig().get("teleport_timeout");
+                    int teleportTimeout = (int) config.getTeleportTimeout();
+                    //int teleportTimeout = (int) pluginsenor.getConfig().get("teleport_timeout");
                     BukkitTask task = new teleportTask(this.pluginsenor, location, player)
                             .runTaskLater(this.pluginsenor, (int) teleportTimeout*20);
                     teleportingPlayers.put(player, task.getTaskId());

@@ -9,3 +9,5 @@ commands:
   setspawn:
     description: Command used to set the spawn of the server
     permission: setspawn.use
+  plugino.reload:
+    description: Reloads the config.yml file
